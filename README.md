@@ -1,6 +1,6 @@
 ![alt text](https://s3.amazonaws.com/spark-website/spark.png "")
 
-sparkcore-local-http-server-rest-json
+# sparkcore-local-http-server-rest-json
 ---
 
 https://www.youtube.com/watch?v=ifYkC7UdMVA
@@ -12,7 +12,8 @@ alt="Aller sur Youtube" width="560" border="10" /></a>
 ---
 - EN : Local HTTP server with REST and JSON for Sparkcore
 
-This project implement a Http server on Sparkcore.
+This project implement a Http server on Sparkcore itself. Once compiled into the WEB IDE, the server will be available at http://IP-SPARKCORE (port 80 by default)
+
 
 - FR : Serveur HTTP REST et JSON pour Spark Core.
 
