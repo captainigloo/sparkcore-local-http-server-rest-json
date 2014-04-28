@@ -1,6 +1,9 @@
 sparkcore-local-http-server-rest-json
 =====================================
 
+https://www.youtube.com/watch?v=ifYkC7UdMVA
+
+
 - EN : Local HTTP server with REST and JSON for Sparkcore
 
 This project implement a Http server on Sparkcore.
