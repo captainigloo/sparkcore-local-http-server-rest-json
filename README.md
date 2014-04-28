@@ -13,8 +13,8 @@ alt="Aller sur Youtube" width="560" border="10" /></a>
 
 This project implement a Http server on Sparkcore itself. Once compiled into the [Web IDE](https://www.spark.io/build), the server will be available at http://IP-SPARKCORE (port 80 by default)
 
-Files of project 
-- slre.h : Headers
+### Common files of projects :
+- slre.h
 - slre.cpp
 - HttpResponse.h
 - HttpResponse.cpp
@@ -23,12 +23,16 @@ Files of project
 - http_parser.h
 - http_parser.cpp
 
+### Projects
+- Project 1 : Web-Tinker.ino
+- Project 2 : Web-Compas.ino
+
 ## FR : Serveur HTTP REST et JSON pour Spark Core.
 
 Ce projet permet de mettre en oeuvre un serveur sur le Spark core lui-même.
 Un fois compilé dans le [Web IDE](https://www.spark.io/build), le serveur sera accessible à l'adresse http://IP-SPARKCORE (port :80 par défaut). Ce projet est un exemple permettant d'envisager d'autres projet.
 
-Fichiers du projet (Rappel .h = fichier d'entête, .cpp = fichier de définition [Sources])
+Fichiers communs des projets (Rappel .h = fichier d'entête, .cpp = fichier de définition [Sources]) :
 - slre.h : 
 - slre.cpp :
 - HttpResponse.h : 
@@ -37,6 +41,10 @@ Fichiers du projet (Rappel .h = fichier d'entête, .cpp = fichier de définition
 - HttpRequest.cpp :
 - http_parser.h :
 - http_parser.cpp :
+
+### Projets
+- Projet 1 : Web-Tinker.ino
+- Projet 2 : Web-Compas.ino
 
 [Youtube](https://www.youtube.com/watch?v=ifYkC7UdMVA)
 Emphasis, aka italics, with *asterisks* or _underscores_.
