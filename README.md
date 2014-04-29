@@ -53,5 +53,5 @@ Remerciements à :
 - [Joyent Github/ http-parser](https://github.com/joyent/http-parser)
 
 ### Projets
-- Projet 1 : Web-Tinker.ino
+- Projet 1 : Web-Tinker.ino - Ce projet permet de contrôler D0-D7 [HIGH|LOW] soit par l'interface web, soit en requête HTTP de forme http://IP-Sparkcore/D0/on|off.
 - Projet 2 : Web-Compas.ino
