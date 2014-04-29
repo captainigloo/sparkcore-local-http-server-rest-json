@@ -25,6 +25,8 @@ This project implement a Http server on Sparkcore itself. Once compiled into the
 
 Thanks to :
 - [SLRE: Super Light Regular Expression library](https://github.com/cesanta/slre)
+- [Marcussacapuces91 Github / SparkCore-RESTserver ](https://github.com/Marcussacapuces91/SparkCore-RESTserver)
+- [Joyent Github/ http-parser](https://github.com/joyent/http-parser)
 
 ### Projects
 - Project 1 : Web-Tinker.ino
@@ -47,6 +49,8 @@ Fichiers communs des projets (Rappel .h = fichier d'entête, .cpp = fichier de d
 
 Remerciements à :
 - [SLRE: Super Light Regular Expression library](https://github.com/cesanta/slre)
+- [Marcussacapuces91 Github / SparkCore-RESTserver ](https://github.com/Marcussacapuces91/SparkCore-RESTserver)
+- [Joyent Github/ http-parser](https://github.com/joyent/http-parser)
 
 ### Projets
 - Projet 1 : Web-Tinker.ino
