@@ -23,6 +23,9 @@ This project implement a Http server on Sparkcore itself. Once compiled into the
 - http_parser.h
 - http_parser.cpp
 
+Thanks to :
+- [SLRE: Super Light Regular Expression library](https://github.com/cesanta/slre)
+
 ### Projects
 - Project 1 : Web-Tinker.ino
 - Project 2 : Web-Compas.ino
@@ -41,6 +44,9 @@ Fichiers communs des projets (Rappel .h = fichier d'entête, .cpp = fichier de d
 - HttpRequest.cpp :
 - http_parser.h :
 - http_parser.cpp :
+
+Remerciements à :
+- [SLRE: Super Light Regular Expression library](https://github.com/cesanta/slre)
 
 ### Projets
 - Projet 1 : Web-Tinker.ino
