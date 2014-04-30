@@ -56,4 +56,3 @@ Remerciements à :
 - Projet 1 : spark-Web-Tinker.ino - Ce projet permet de contrôler D0-D7 [HIGH|LOW] soit par l'interface web, soit en requête HTTP de forme http://IP-Sparkcore/D0/on|off.
 - Projet 2 : spark-Web-Compas.ino
 
-![alt text](http://domotique-info.fr/wp-content/uploads/2014/04/domotique-info-webideaddlib.gif "")
