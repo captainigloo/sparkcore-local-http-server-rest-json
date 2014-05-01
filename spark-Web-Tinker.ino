@@ -1,14 +1,7 @@
-//Version 0.1
-// Codeur : Sébastien Joly
-// This #include statement was automatically added by the Spark IDE.
-////#include "SparkTime.h"
-// This #include statement was automatically added by the Spark IDE.
+#include "SparkTime.h"
 #include "HttpResponse.h"
-// This #include statement was automatically added by the Spark IDE.
 #include "http_parser.h"
-// This #include statement was automatically added by the Spark IDE.
 #include "HttpRequest.h"
-// This #include statement was automatically added by the Spark IDE.
 #include "slre.h"
 
 #include <map>
@@ -16,7 +9,7 @@
 
 char myIpString[24];
 char maMacString[32];
-//char MaintenantString;
+//char datetime[12];
 //NTP -----------------------
 //UDP UDPClient;
 //SparkTime rtc;
@@ -81,8 +74,6 @@ void flashRed(const unsigned aDelay = 500) {
 
 /**
  * "Class WebServer" impléments TCPServer et fourni toutes les methodes pour le serveur http .
- * Pour démarer à besoin de begin().
- * Peut être arrêté avec end().
  */
 class WebServer : public TCPServer {
 private:
@@ -299,8 +290,10 @@ WebServer ws;
 
 void setup() {
 //Debug console
-    //rtc.begin(&UDPClient, "north-america.pool.ntp.org");
+    //rtc.begin(&UDPClient, "pool.ntp.org");
     //rtc.setTimeZone(+2); // gmt offset
+    //rtc.setUseEuroDSTRule(true);
+    
     Serial.begin(9600);
     delay(1000);
     Serial.println(Network.localIP());
@@ -311,12 +304,14 @@ void setup() {
     IPAddress myIp = Network.localIP();
     sprintf(myIpString, "%d.%d.%d.%d", myIp[0], myIp[1], myIp[2], myIp[3]);
     Spark.variable("ipAddress", myIpString, STRING);
-//Récupérer MAC----------------------------------------------------------------------------------------------    
+
+  //Récupérer MAC----------------------------------------------------------------------------------------------    
     byte Mac[6];
     Network.macAddress(Mac);
-    sprintf(maMacString, "%d:%d:%d:%d:%d:%d", Mac[0], Mac[1], Mac[2], Mac[3], Mac[4], Mac[5]);
-    Spark.variable("AdressePhysique", maMacString, STRING);
+    sprintf(maMacString, "%02X:%02X:%02X:%02X:%02X:%02X", Mac[5], Mac[4], Mac[3], Mac[2], Mac[1], Mac[0]);
+    Spark.variable("MAC", maMacString, STRING);
     //remarque : ne remonte pas dans le cloud en raison du bug limitant les variables supérieure à 9 caractères.
+    
 //Démarrer serveur Web---------------------------------------------------------------------------------------    
     ws.begin();
     flashGreen();
@@ -324,5 +319,5 @@ void setup() {
 
 void loop() {
     ws.loop();
-}
 
+}
