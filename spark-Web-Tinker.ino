@@ -9,15 +9,6 @@
 
 char myIpString[24];
 char maMacString[32];
-//char datetime[12];
-//NTP -----------------------
-//UDP UDPClient;
-//SparkTime rtc;
-//unsigned long currentTime;
-//unsigned long lastTime = 0UL;
-//String timeStr;
-//---------------------------
-
 class Welcome : public HttpResponse {
 protected:
     Stream& printBody(Stream& aStream) const {
@@ -290,10 +281,6 @@ WebServer ws;
 
 void setup() {
 //Debug console
-    //rtc.begin(&UDPClient, "pool.ntp.org");
-    //rtc.setTimeZone(+2); // gmt offset
-    //rtc.setUseEuroDSTRule(true);
-    
     Serial.begin(9600);
     delay(1000);
     Serial.println(Network.localIP());
