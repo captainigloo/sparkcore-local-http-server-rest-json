@@ -60,3 +60,6 @@ Remerciements à :
 - Projet 1 : spark-Web-Tinker.ino - Ce projet permet de contrôler D0-D7 [HIGH|LOW] soit par l'interface web, soit en requête HTTP de forme http://IP-Sparkcore/D0/on|off.
 - Projet 2 : spark-Web-Compas.ino
 
+### Installation
+- [Connecter le Spark Core à votre Wifi] (https://www.spark.io/start)
+- [Déployer le firmware depuis le Web IDE Spark Cloud](https://www.spark.io/build/)
