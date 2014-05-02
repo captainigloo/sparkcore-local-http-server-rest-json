@@ -32,6 +32,10 @@ Thanks to :
 - Project 1 : spark-Web-Tinker.ino
 - Project 2 : spark-Web-Compas.ino
 
+### Installation
+[Connect the Spark Core to your wifi] (https://www.spark.io/start)
+[Deploy the firmware using the Spark Cloud](https://www.spark.io/build/)
+
 ## FR : Serveur HTTP REST et JSON pour Spark Core.
 
 Ce projet permet de mettre en oeuvre un serveur sur le Spark core lui-même.
