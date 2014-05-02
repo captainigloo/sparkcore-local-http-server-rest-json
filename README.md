@@ -33,8 +33,8 @@ Thanks to :
 - Project 2 : spark-Web-Compas.ino
 
 ### Installation
-[Connect the Spark Core to your wifi] (https://www.spark.io/start)
-[Deploy the firmware using the Spark Cloud](https://www.spark.io/build/)
+- [Connect the Spark Core to your wifi] (https://www.spark.io/start)
+- [Deploy the firmware using the Spark Cloud](https://www.spark.io/build/)
 
 ## FR : Serveur HTTP REST et JSON pour Spark Core.
 
