@@ -1,4 +1,4 @@
-#include "SparkTime.h"
+
 #include "HttpResponse.h"
 #include "http_parser.h"
 #include "HttpRequest.h"
