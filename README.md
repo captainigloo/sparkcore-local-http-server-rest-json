@@ -35,6 +35,9 @@ Thanks to :
 ### Installation
 - [Connect the Spark Core to your wifi](https://www.spark.io/start)
 - [Deploy the firmware using the Spark Cloud](https://www.spark.io/build/)
+- How add files in project :
+
+![Add file](http://domotique-info.fr/wp-content/uploads/2014/04/domotique-info-webideaddlib.gif)
 
 ## FR : Serveur HTTP REST et JSON pour Spark Core.
 
@@ -63,4 +66,7 @@ Remerciements à :
 ### Installation
 - [Connecter le Spark Core à votre Wifi](https://www.spark.io/start)
 - [Déployer le firmware depuis le Web IDE Spark Cloud](https://www.spark.io/build/)
+- Comment ajouter les fichiers dans le projet :
+
+![Add file](http://domotique-info.fr/wp-content/uploads/2014/04/domotique-info-webideaddlib.gif)
 
