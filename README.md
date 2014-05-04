@@ -6,7 +6,12 @@
 " target="_blank"><img src="http://img.youtube.com/vi/ifYkC7UdMVA/0.jpg" 
 alt="Aller sur Youtube" width="560" border="10" /></a>
 
-[Youtube](https://www.youtube.com/watch?v=ifYkC7UdMVA)
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=bbSlwt5ZI3Q
+" target="_blank"><img src="http://img.youtube.com/vi/bbSlwt5ZI3Q/0.jpg" 
+alt="Aller sur Youtube" width="560" border="10" /></a>
+
+[Youtube video 1](https://www.youtube.com/watch?v=ifYkC7UdMVA)
+[Youtube video 2](http://youtu.be/bbSlwt5ZI3Q)
 
 
 ## EN : Local HTTP server (REST & JSON) for Sparkcore
