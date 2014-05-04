@@ -3,12 +3,21 @@
 #include "http_parser.h"
 #include "HttpRequest.h"
 #include "slre.h"
-
 #include <map>
 #include <list>
+//-----------------------------------------------------
+int pinD0;
+int pinD1;
+int pinD2;
+int pinD3;
+int pinD4;
+int pinD5;
+int pinD6;
+int pinD7;
 
 char myIpString[24];
 char maMacString[32];
+
 class Welcome : public HttpResponse {
 protected:
     Stream& printBody(Stream& aStream) const {
@@ -18,21 +27,30 @@ protected:
  <html> \
     <head> \
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8' /> \
-    <meta http-equiv='refresh' content='5'> \
+    <meta http-equiv='refresh' content='5;url=/'> \
     <title> \
     Sparkcore \
     </title> \
     </head> \
-    <body> \
-        <h1>Serveur  SparkCore</h1> \
-        <p>D0 : <a href='/D0/on'>On</a> - <a href='/D0/off'>Off</a></p> \
-        <p>D1 : <a href='/D1/on'>On</a> - <a href='/D1/off'>Off</a></p> \
-        <p>D2 : <a href='/D2/on'>On</a> - <a href='/D2/off'>Off</a></p> \
-        <p>D3 : <a href='/D3/on'>On</a> - <a href='/D3/off'>Off</a></p> \
-        <p>D4 : <a href='/D4/on'>On</a> - <a href='/D4/off'>Off</a></p> \
-        <p>D5 : <a href='/D5/on'>On</a> - <a href='/D5/off'>Off</a></p> \
-        <p>D6 : <a href='/D6/on'>On</a> - <a href='/D6/off'>Off</a></p> \
-        <p>D7 : <a href='/D7/on'>On</a> - <a href='/D7/off'>Off</a></p> \
+    <body bgcolor='#A9D300'> \
+        <h1>Serveur Spark Core</h1>\n");
+        aStream.print("<p>D0 : <a href='/D0/on'>On</a> - <a href='/D0/off'>Off</a> -  état : \n");
+        aStream.print(pinD0);
+        aStream.print("</p><p>D1 : <a href='/D1/on'>On</a> - <a href='/D1/off'>Off</a> -  état : \n");
+        aStream.print(pinD1);
+        aStream.print("</p><p>D2 : <a href='/D2/on'>On</a> - <a href='/D2/off'>Off</a> -  état : \n");
+        aStream.print(pinD2);
+        aStream.print("</p><p>D3 : <a href='/D3/on'>On</a> - <a href='/D3/off'>Off</a> -  état : \n");
+        aStream.print(pinD3);
+        aStream.print("</p><p>D4 : <a href='/D4/on'>On</a> - <a href='/D4/off'>Off</a> -  état : \n");
+        aStream.print(pinD4);        
+        aStream.print("</p><p>D5 : <a href='/D5/on'>On</a> - <a href='/D5/off'>Off</a> -  état : \n");
+        aStream.print(pinD5);         
+        aStream.print("</p><p>D6 : <a href='/D6/on'>On</a> - <a href='/D6/off'>Off</a> -  état : \n");
+        aStream.print(pinD6);         
+        aStream.print("</p><p>D7 : <a href='/D7/on'>On</a> - <a href='/D7/off'>Off</a> -  état : \n");
+        aStream.print(pinD7);     
+        aStream.print("</p> \
     </body>\n \
 </html>\n");
         return aStream;
@@ -81,7 +99,7 @@ public:
  * Doît-être utilisé dans la fonction boucle loop() .
  */
     void loop() {
-        //currentTime = rtc.now(); //-----------------------------------------
+
         if (TCPClient client = available()) {
             
             HttpRequest hr;
@@ -119,11 +137,13 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D0, HIGH);
                     //client << err204.status(204);
+                    pinD0 = digitalRead(D0);
                     client << welcome;
                     flashGreen();
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D0, LOW);
                     //client << err204.status(204);
+                    pinD0 = digitalRead(D0);
                     client << welcome;
                     flashRed();
                 } else {
@@ -137,11 +157,13 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D1, HIGH);
                     //client << err204.status(204);
+                    pinD1 = digitalRead(D1);
                     client << welcome;
                     flashGreen();
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D1, LOW);
                     //client << err204.status(204);
+                    pinD1 = digitalRead(D1);
                     client << welcome;
                     flashRed();
                 } else {
@@ -155,11 +177,13 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D2, HIGH);
                     //client << err204.status(204);
+                    pinD2 = digitalRead(D2);
                     client << welcome;
                     flashGreen();
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D2, LOW);
                     //client << err204.status(204);
+                    pinD2 = digitalRead(D2);
                     client << welcome;
                     flashRed();
                 } else {
@@ -173,11 +197,13 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D3, HIGH);
                     //client << err204.status(204);
+                    pinD3 = digitalRead(D3);
                     client << welcome;
                     flashGreen();
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D3, LOW);
                     //client << err204.status(204);
+                    pinD3 = digitalRead(D3);
                     client << welcome;
                     flashRed();
                 } else {
@@ -191,11 +217,13 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D4, HIGH);
                     //client << err204.status(204);
+                    pinD4 = digitalRead(D4);
                     client << welcome;
                     flashGreen();
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D4, LOW);
                     //client << err204.status(204);
+                    pinD4 = digitalRead(D4);
                     client << welcome;
                     flashRed();
                 } else {
@@ -209,11 +237,13 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D5, HIGH);
                     //client << err204.status(204);
+                    pinD5 = digitalRead(D5);
                     client << welcome;
                     flashGreen();
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D5, LOW);
                     //client << err204.status(204);
+                    pinD5 = digitalRead(D5);
                     client << welcome;
                     flashRed();
                 } else {
@@ -227,11 +257,13 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D6, HIGH);
                     //client << err204.status(204);
+                    pinD6 = digitalRead(D6);
                     client << welcome;
                     flashGreen();
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D6, LOW);
                     //client << err204.status(204);
+                    pinD6 = digitalRead(D6);
                     client << welcome;
                     flashRed();
                 } else {
@@ -245,11 +277,13 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D7, HIGH);
                     //client << err204.status(204);
+                    pinD7 = digitalRead(D7);
                     client << welcome;
                     flashGreen();
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D7, LOW);
                     //client << err204.status(204);
+                    pinD7 = digitalRead(D7);
                     client << welcome;
                     flashRed();
                 } else {
@@ -281,6 +315,9 @@ WebServer ws;
 
 void setup() {
 //Debug console
+
+
+
     Serial.begin(9600);
     delay(1000);
     Serial.println(Network.localIP());
@@ -305,6 +342,14 @@ void setup() {
 }
 
 void loop() {
-    ws.loop();
 
+    pinD0 = digitalRead(D0);
+    pinD1 = digitalRead(D1);
+    pinD2 = digitalRead(D2);
+    pinD3 = digitalRead(D3);
+    pinD4 = digitalRead(D4);
+    pinD5 = digitalRead(D5);
+    pinD6 = digitalRead(D6);
+    pinD7 = digitalRead(D7);
+    ws.loop();
 }
