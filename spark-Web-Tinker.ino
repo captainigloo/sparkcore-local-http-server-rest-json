@@ -1,11 +1,9 @@
-
 #include "HttpResponse.h"
 #include "http_parser.h"
 #include "HttpRequest.h"
 #include "slre.h"
 #include <map>
 #include <list>
-//-----------------------------------------------------
 int pinD0;
 int pinD1;
 int pinD2;
@@ -15,8 +13,11 @@ int pinD5;
 int pinD6;
 int pinD7;
 
+char json[128];
+
 char myIpString[24];
 char maMacString[32];
+char my_device_name[] = "sparkweb";
 
 class Welcome : public HttpResponse {
 protected:
@@ -27,7 +28,6 @@ protected:
  <html> \
     <head> \
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8' /> \
-    <meta http-equiv='refresh' content='5;url=/'> \
     <title> \
     Sparkcore \
     </title> \
@@ -50,12 +50,11 @@ protected:
         aStream.print(pinD6);         
         aStream.print("</p><p>D7 : <a href='/D7/on'>On</a> - <a href='/D7/off'>Off</a> -  état : \n");
         aStream.print(pinD7);     
-        aStream.print("</p> \
+        aStream.print("</p><p><a href='/json'>Voir retour json</a></p> \
     </body>\n \
 </html>\n");
         return aStream;
     }
-    
 public:
 };
 
@@ -120,17 +119,12 @@ public:
 //Gestion des URL
             if (slre_match("^/(|index.htm)$", hr.URL(), strlen(hr.URL()), NULL, 0) >= 0) {
                 client << welcome;
-                Serial.println("Debug : Requete sur index.htm");
+                //Serial.println("Debug : Requete sur index.htm");
 //URL JSON---------------------------------------------------------------------------------------------------
             } else if ((slre_match("^/json$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
-                //string json;
-                    //json = "{\"id\":\""  + String(maMacString) + "\",\"analog\":$D,\"name\":\"Temp $D\",\"val\":$T}";
-                    //const char lib[] = "{\"id\":\""  + maMacString + "\",\"analog\":$D,\"name\":\"Temp $D\",\"val\":$T}";
-                    //const char lib[] = json;
-                    //"{\"id\":\"$H\",\"analog\":$D,\"name\":\"Temp $D\",\"val\":$T}";
-                    //HttpResponseStatic resp(lib, strlen(lib));
-                    //HttpResponseStatic resp(lib, strlen(lib));
-                    //client << resp.status(400);
+                    sprintf(json,"{\"D0\":%d\,\"D1\":%d,\"D2\":%d,\"D3\":%d,\"D4\":%d,\"D5\":%d,\"D6\":%d,\"D7\":%d}",pinD0,pinD1,pinD2,pinD3,pinD4,pinD5,pinD6,pinD7);
+                    HttpResponseStatic resp(json, strlen(json));
+                    client << resp.status(400);
 //web/URL REST D0 -----------------------------------------------------------------------------------------------
             } else if ((slre_match("^/D0/(on|off)$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
                 pinMode(D0, OUTPUT);
@@ -318,6 +312,14 @@ void setup() {
 
 
 
+	unsigned char idx = 0;
+	while (idx < 3)
+	{
+		mdnsAdvertiser(1,my_device_name,strlen(my_device_name));
+		idx++;
+	}
+
+
     Serial.begin(9600);
     delay(1000);
     Serial.println(Network.localIP());
@@ -334,15 +336,28 @@ void setup() {
     Network.macAddress(Mac);
     sprintf(maMacString, "%02X:%02X:%02X:%02X:%02X:%02X", Mac[5], Mac[4], Mac[3], Mac[2], Mac[1], Mac[0]);
     Spark.variable("MAC", maMacString, STRING);
-    //remarque : ne remonte pas dans le cloud en raison du bug limitant les variables supérieure à 9 caractères.
     
+        String macStr;
+        macStr = "";
+    	macStr += Mac[5];
+    	macStr += ":";
+    	macStr += Mac[4];
+    	macStr += ":";
+    	macStr += Mac[3];	
+    	macStr += ":";
+    	macStr += Mac[2];		
+    	macStr += ":";
+    	macStr += Mac[1];	
+    	macStr += ":";
+    	macStr += Mac[0];	    
+    	
 //Démarrer serveur Web---------------------------------------------------------------------------------------    
     ws.begin();
     flashGreen();
 }
 
 void loop() {
-
+    
     pinD0 = digitalRead(D0);
     pinD1 = digitalRead(D1);
     pinD2 = digitalRead(D2);
