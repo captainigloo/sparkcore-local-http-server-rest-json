@@ -116,7 +116,6 @@ public:
 //URL JSON ------------------------------------------------------------------------------------------------------
             } else if ((slre_match("^/json$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
                     sprintf(json,"{\"D0\":%ld\,\"D1\":%ld,\"D2\":%ld,\"D3\":%ld,\"D4\":%ld,\"D5\":%ld,\"D6\":%ld,\"D7\":%ld}",digitalRead(0),digitalRead(1),digitalRead(2),digitalRead(3),digitalRead(4),digitalRead(5),digitalRead(6),digitalRead(7));
-                    //sprintf(json,"{\"D0\":%d\,\"D1\":%d,\"D2\":%d,\"D3\":%d,\"D4\":%d,\"D5\":%d,\"D6\":%d,\"D7\":%d}",pinD0,pinD1,pinD2,pinD3,pinD4,pinD5,pinD6,pinD7);
                     HttpResponseStatic resp(json, strlen(json));
                     client << resp.status(400);
 //web/URL REST D0 -----------------------------------------------------------------------------------------------
@@ -125,7 +124,6 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D0, HIGH);
                     //client << err204.status(204);
-                    //pinD0 = digitalRead(D0);
                     //Test fonction publish
                     //Spark.publish("D0","On");
                     client << welcome;
@@ -133,7 +131,6 @@ public:
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D0, LOW);
                     //client << err204.status(204);
-                    //pinD0 = digitalRead(D0);
                     //Test fonction publish
                     //Spark.publish("D0","Off");
                     client << welcome;
@@ -149,7 +146,6 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D1, HIGH);
                     //client << err204.status(204);
-                    //pinD1 = digitalRead(D1);
                     //Test fonction publish
                     //Spark.publish("D1","On");
                     client << welcome;
@@ -157,7 +153,6 @@ public:
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D1, LOW);
                     //client << err204.status(204);
-                    //pinD1 = digitalRead(D1);
                     //Test fonction publish
                     //Spark.publish("D1","Off");
                     client << welcome;
@@ -173,13 +168,11 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D2, HIGH);
                     //client << err204.status(204);
-                    //pinD2 = digitalRead(D2);
                     client << welcome;
                     flashGreen();
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D2, LOW);
                     //client << err204.status(204);
-                    //pinD2 = digitalRead(D2);
                     client << welcome;
                     flashRed();
                 } else {
@@ -193,13 +186,11 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D3, HIGH);
                     //client << err204.status(204);
-                    //pinD3 = digitalRead(D3);
                     client << welcome;
                     flashGreen();
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D3, LOW);
                     //client << err204.status(204);
-                    //pinD3 = digitalRead(D3);
                     client << welcome;
                     flashRed();
                 } else {
@@ -213,13 +204,11 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D4, HIGH);
                     //client << err204.status(204);
-                    //pinD4 = digitalRead(D4);
                     client << welcome;
                     flashGreen();
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D4, LOW);
                     //client << err204.status(204);
-                    //pinD4 = digitalRead(D4);
                     client << welcome;
                     flashRed();
                 } else {
@@ -233,13 +222,11 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D5, HIGH);
                     //client << err204.status(204);
-                    //pinD5 = digitalRead(D5);
                     client << welcome;
                     flashGreen();
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D5, LOW);
                     //client << err204.status(204);
-                    //pinD5 = digitalRead(D5);
                     client << welcome;
                     flashRed();
                 } else {
@@ -253,13 +240,11 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D6, HIGH);
                     //client << err204.status(204);
-                    //pinD6 = digitalRead(D6);
                     client << welcome;
                     flashGreen();
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D6, LOW);
                     //client << err204.status(204);
-                    //pinD6 = digitalRead(D6);
                     client << welcome;
                     flashRed();
                 } else {
@@ -273,13 +258,11 @@ public:
                 if (!strcmp(caps[0].ptr, "on")) {
                     digitalWrite(D7, HIGH);
                     //client << err204.status(204);
-                    //pinD7 = digitalRead(D7);
                     client << welcome;
                     flashGreen();
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D7, LOW);
                     //client << err204.status(204);
-                    //pinD7 = digitalRead(D7);
                     client << welcome;
                     flashRed();
                 } else {
