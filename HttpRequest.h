@@ -17,12 +17,12 @@
 #include "http_parser.h"
 #include <string.h>
 
-#define MAX_URL_LENGTH 512
+#define MAX_URL_LENGTH 128
 
 // #define USE_HEADERS
 #ifdef USE_HEADERS
-#define MAX_HEADER_FIELD_LENGTH 512
-#define MAX_HEADER_VALUE_LENGTH 512
+#define MAX_HEADER_FIELD_LENGTH 128
+#define MAX_HEADER_VALUE_LENGTH 128
 #endif
 
 class HttpRequest {
