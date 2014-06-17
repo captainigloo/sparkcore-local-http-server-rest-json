@@ -4,33 +4,47 @@
 #include "slre.h"
 #include <map>
 #include <list>
-char jsonD[64];
-char jsonA[64];
 class Welcome : public HttpResponse {
 protected:
 //Formatage page accueil  ---------------------------------------------------------------------------------------
     Stream& printBody(Stream& aStream) const {
-        aStream.print(
-"<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01//EN' \
-	'http://www.w3.org/TR/html4/strict.dtd'> \
- <html> \
+        aStream.print("<html> \
     <head> \
-    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' /> \
     <title> \
     Sparkcore \
     </title> \
     </head> \
-    <body bgcolor='#A9D300'> \
-        <h1>Serveur Spark Core</h1>\n");
-        aStream.print("</p><p><a href='/jsonD'>Voir retour json Digital</a></p> \n");
-        aStream.print("</p><p><a href='/jsonA'>Voir retour json Analog</a></p> \
+    <body> \
+        <p><a href='/json/dig'>Json Digital</a></p> \
+        <p><a href='/json/ana'>Json Analog</a></p> \
     </body>\n \
-</html>\n");
+    </html>\n");
         return aStream;
     }
 public:
 };
 
+class Help :  public HttpResponse {
+protected:
+    //Formatage page aide  ---------------------------------------------------------------------------------------
+    Stream& printBody(Stream& aStream) const {
+    aStream.print("<html> \
+    <head> \
+    <title> \
+    Sparkcore \
+    </title> \
+    </head> \
+    <body> \
+        <p>Le paramètre doit-être 'ana' ou 'dig' pour l'url /json/.</p> \
+        <p>Le paramètre doit-être 'on' ou 'off' pour l'url /D0/ à /D7/.</p> \
+    </body>\n \
+    </html>\n");
+        return aStream;
+    }
+public:
+};
+
+const Help help;
 const Welcome welcome;
 // "Class WebServer" impléments TCPServer et fourni toutes les methodes pour le serveur http .
 class WebServer : public TCPServer {
@@ -44,7 +58,8 @@ public:
     WebServer(const unsigned aPort) : TCPServer(aPort) {}    
 // Doît-être utilisé dans la fonction boucle loop() .
     void loop() {
-
+        char jsonD[64];
+        char jsonA[96];
         if (TCPClient client = available()) {
             
             HttpRequest hr;
@@ -65,17 +80,21 @@ public:
 //Gestion des URL -----------------------------------------------------------------------------------------------
             if (slre_match("^/(|index.htm)$", hr.URL(), strlen(hr.URL()), NULL, 0) >= 0) {
                 client << welcome;
-//URL JSON ------------------------------------------------------------------------------------------------------
-            } else if ((slre_match("^/jsonD$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
+//URL JSON --------------------------------------------------------------------------------------------------
+            } else if ((slre_match("^/json/(ana|dig)$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
+                pinMode(D0, OUTPUT);
+                if (!strcmp(caps[0].ptr, "dig")) {
                     sprintf(jsonD,"{\"D0\":%ld\,\"D1\":%ld,\"D2\":%ld,\"D3\":%ld,\"D4\":%ld,\"D5\":%ld,\"D6\":%ld,\"D7\":%ld}",digitalRead(0),digitalRead(1),digitalRead(2),digitalRead(3),digitalRead(4),digitalRead(5),digitalRead(6),digitalRead(7));
                     HttpResponseStatic resp(jsonD, strlen(jsonD));
                     client << resp.status(400);
-//URL JSON ------------------------------------------------------------------------------------------------------
-            } else if ((slre_match("^/jsonA$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
+                } else if (!strcmp(caps[0].ptr, "ana")) {
                     sprintf(jsonA,"{\"A0\":%ld\,\"A1\":%ld,\"A2\":%ld,\"A3\":%ld,\"A4\":%ld,\"A5\":%ld,\"A6\":%ld,\"A7\":%ld}",analogRead(0),analogRead(1),analogRead(2),analogRead(3),analogRead(4),analogRead(5),analogRead(6),analogRead(7));
                     HttpResponseStatic resp(jsonA, strlen(jsonA));
                     client << resp.status(400);
-//web/URL REST D0 -----------------------------------------------------------------------------------------------
+                } else {
+                    client << help;
+                }                    
+//URL REST D0 -----------------------------------------------------------------------------------------------
             } else if ((slre_match("^/D0/(on|off)$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
                 pinMode(D0, OUTPUT);
                 if (!strcmp(caps[0].ptr, "on")) {
@@ -85,9 +104,7 @@ public:
                     digitalWrite(D0, LOW);
                     client << welcome;
                 } else {
-                    const char lib[] = "<html>Le paramètre doit-être 'on' ou 'off'.</html>";
-                    HttpResponseStatic resp(lib, strlen(lib));
-                    client << resp.status(400);
+                    client << help;
                 }
 //URL REST D1 -----------------------------------------------------------------------------------------------
             } else if ((slre_match("^/D1/(on|off)$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
@@ -99,9 +116,7 @@ public:
                     digitalWrite(D1, LOW);
                     client << welcome;
                 } else {
-                    const char lib[] = "<html>Le paramètre doit-être 'on' ou 'off'.</html>";
-                    HttpResponseStatic resp(lib, strlen(lib));
-                    client << resp.status(400);
+                    client << help;
                 }
 //URL REST D2 -----------------------------------------------------------------------------------------------
             } else if ((slre_match("^/D2/(on|off)$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
@@ -113,9 +128,7 @@ public:
                     digitalWrite(D2, LOW);
                     client << welcome;
                 } else {
-                    const char lib[] = "<html>Le paramètre doit-être 'on' ou 'off'.</html>";
-                    HttpResponseStatic resp(lib, strlen(lib));
-                    client << resp.status(400);
+                    client << help;
                 }
 //URL REST D3 -----------------------------------------------------------------------------------------------
             } else if ((slre_match("^/D3/(on|off)$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
@@ -127,9 +140,7 @@ public:
                     digitalWrite(D3, LOW);
                     client << welcome;
                 } else {
-                    const char lib[] = "<html>Le paramètre doit-être 'on' ou 'off'.</html>";
-                    HttpResponseStatic resp(lib, strlen(lib));
-                    client << resp.status(400);
+                    client << help;
                 }
 //URL REST D4 -----------------------------------------------------------------------------------------------
             } else if ((slre_match("^/D4/(on|off)$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
@@ -141,9 +152,7 @@ public:
                     digitalWrite(D4, LOW);
                     client << welcome;
                 } else {
-                    const char lib[] = "<html>Le paramètre doit-être 'on' ou 'off'.</html>";
-                    HttpResponseStatic resp(lib, strlen(lib));
-                    client << resp.status(400);
+                    client << help;
                 }
 //URL REST D5 -----------------------------------------------------------------------------------------------
             } else if ((slre_match("^/D5/(on|off)$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
@@ -155,9 +164,7 @@ public:
                     digitalWrite(D5, LOW);
                     client << welcome;
                 } else {
-                    const char lib[] = "<html>Le paramètre doit-être 'on' ou 'off'.</html>";
-                    HttpResponseStatic resp(lib, strlen(lib));
-                    client << resp.status(400);
+                    client << help;
                 }
 //URL REST D6 -----------------------------------------------------------------------------------------------
             } else if ((slre_match("^/D6/(on|off)$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
@@ -169,9 +176,7 @@ public:
                     digitalWrite(D6, LOW);
                     client << welcome;
                 } else {
-                    const char lib[] = "<html>Le paramètre doit-être 'on' ou 'off'.</html>";
-                    HttpResponseStatic resp(lib, strlen(lib));
-                    client << resp.status(400);
+                    client << help;
                 }
 //URL REST D7 -----------------------------------------------------------------------------------------------
             } else if ((slre_match("^/D7/(on|off)$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
@@ -182,11 +187,8 @@ public:
                 } else if (!strcmp(caps[0].ptr, "off")) {
                     digitalWrite(D7, LOW);
                     client << welcome;
-                    //flashRed();
                 } else {
-                    const char lib[] = "<html>Le paramètre doit-être 'on' ou 'off'.</html>";
-                    HttpResponseStatic resp(lib, strlen(lib));
-                    client << resp.status(400);
+                    client << help;
                 }
 //URL Inconnue ----------------------------------------------------------------------------------------------
             } else {
@@ -212,10 +214,10 @@ void setup() {
 
     Serial.begin(9600);
     delay(1000);
-    //Serial.println(Network.localIP());
-    //Serial.println(Network.subnetMask());
-    //Serial.println(Network.gatewayIP());
-    //Serial.println(Network.SSID());
+    Serial.println(Network.localIP());
+    Serial.println(Network.subnetMask());
+    Serial.println(Network.gatewayIP());
+    Serial.println(Network.SSID());
     //Serial.println(Spark.deviceID());
 
     ws.begin();
@@ -225,3 +227,6 @@ void loop() {
     ws.loop();
 
 }
+
+
+
