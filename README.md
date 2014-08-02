@@ -21,14 +21,13 @@ Thanks to :
 - [Marcussacapuces91 Github / SparkCore-RESTserver ](https://github.com/Marcussacapuces91/SparkCore-RESTserver)
 - [Joyent Github/ http-parser](https://github.com/joyent/http-parser)
 
-### Projects
-- Project 1 : spark-Web-Tinker.ino
+### Projet "spark-Web-Tinker.ino"
 
-RESTFull URL : http://IP-Sparkcore/D0/on|off
-Digital JSON URL : http://IP-Sparkcore/json/dig/
-Return : {"TS":20140802091229,"D0":0,"D1":0,"D2":0,"D3":0,"D4":0,"D5":0,"D6":0,"D7":1}
-Analog JSON URL : http://IP-Sparkcore/json/ana/
-Return : {"TS":20140802091252,"A0":2127,"A1":2117,"A2":2097,"A3":2098,"A4":2107,"A5":2114,"A6":2083,"A7":2085}
+- RESTFull URL : http://IP-Sparkcore/D0/on|off
+- Digital JSON URL : http://IP-Sparkcore/json/dig/
+- Return : {"TS":20140802091229,"D0":0,"D1":0,"D2":0,"D3":0,"D4":0,"D5":0,"D6":0,"D7":1}
+- Analog JSON URL : http://IP-Sparkcore/json/ana/
+- Return : {"TS":20140802091252,"A0":2127,"A1":2117,"A2":2097,"A3":2098,"A4":2107,"A5":2114,"A6":2083,"A7":2085}
 
 ### Installation
 - [Connect the Spark Core to your wifi](https://www.spark.io/start)
