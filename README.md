@@ -2,7 +2,7 @@
 ![alt text](https://s3.amazonaws.com/spark-website/spark.png "")
 ## EN : Local HTTP server (REST & JSON) for Sparkcore
 
-This project implement a Http server on Sparkcore itself. Once compiled into the [Web IDE](https://www.spark.io/build), the server will be available at http://IP-SPARKCORE (port 80 by default)
+This project implement a Http server on Sparkcore itself. Once compiled into the [Web IDE](https://www.spark.io/build), the server will be available at http://IP-SPARKCORE (port 80 by default).
 
 ### Common files of projects :
 - slre.h
@@ -23,7 +23,12 @@ Thanks to :
 
 ### Projects
 - Project 1 : spark-Web-Tinker.ino
-- Project 2 : spark-Web-Compas.ino
+
+RESTFull URL : http://IP-Sparkcore/D0/on|off.
+Digital JSON URL : http://IP-Sparkcore/json/dig/
+Return : {"TS":20140802091229,"D0":0,"D1":0,"D2":0,"D3":0,"D4":0,"D5":0,"D6":0,"D7":1}
+Analog JSON URL : http://IP-Sparkcore/json/ana/
+Return : {"TS":20140802091252,"A0":2127,"A1":2117,"A2":2097,"A3":2098,"A4":2107,"A5":2114,"A6":2083,"A7":2085}
 
 ### Installation
 - [Connect the Spark Core to your wifi](https://www.spark.io/start)
@@ -55,8 +60,13 @@ Remerciements à :
 - [Joyent Github/ http-parser](https://github.com/joyent/http-parser)
 
 ### Projets
-- Projet 1 : spark-Web-Tinker.ino - Ce projet permet de contrôler D0-D7 [HIGH|LOW] soit par l'interface web, soit en requête HTTP de forme http://IP-Sparkcore/D0/on|off.
-- Projet 2 : spark-Web-Compas.ino
+- Projet 1 : spark-Web-Tinker.ino
+
+RESTFull URL : http://IP-Sparkcore/D0/on|off.
+Digital JSON URL : http://IP-Sparkcore/json/dig/
+Retour : {"TS":20140802091229,"D0":0,"D1":0,"D2":0,"D3":0,"D4":0,"D5":0,"D6":0,"D7":1}
+Analog JSON URL : http://IP-Sparkcore/json/ana/
+Retour : {"TS":20140802091252,"A0":2127,"A1":2117,"A2":2097,"A3":2098,"A4":2107,"A5":2114,"A6":2083,"A7":2085}
 
 ### Installation
 - [Connecter le Spark Core à votre Wifi](https://www.spark.io/start)
