@@ -1,9 +1,21 @@
+// This #include statement was automatically added by the Spark IDE.
+
 #include "http_parser.h"
 #include "HttpResponse.h"
 #include "HttpRequest.h"
 #include "slre.h"
 #include <map>
 #include <list>
+#include "SparkTime.h"
+
+UDP UDPClient;
+SparkTime rtc;
+
+unsigned long currentTime;
+unsigned long lastTime = 0UL;
+String timeStr;
+char* TS;
+        
 class Welcome : public HttpResponse {
 protected:
 //Formatage page accueil  ---------------------------------------------------------------------------------------
@@ -46,7 +58,7 @@ public:
 
 const Help help;
 const Welcome welcome;
-// "Class WebServer" impléments TCPServer et fourni toutes les methodes pour le serveur http .
+// "Class WebServer" implémente TCPServer et fourni toutes les methodes pour le serveur http .
 class WebServer : public TCPServer {
 private:
 
@@ -58,8 +70,9 @@ public:
     WebServer(const unsigned aPort) : TCPServer(aPort) {}    
 // Doît-être utilisé dans la fonction boucle loop() .
     void loop() {
-        char jsonD[64];
-        char jsonA[96];
+        char jsonD[96];
+        char jsonA[128];
+        TS = (char*)timeStr.c_str();
         if (TCPClient client = available()) {
             
             HttpRequest hr;
@@ -84,11 +97,11 @@ public:
             } else if ((slre_match("^/json/(ana|dig)$", hr.URL(), strlen(hr.URL()), caps, 1) >= 0)) { 
                 pinMode(D0, OUTPUT);
                 if (!strcmp(caps[0].ptr, "dig")) {
-                    sprintf(jsonD,"{\"D0\":%ld\,\"D1\":%ld,\"D2\":%ld,\"D3\":%ld,\"D4\":%ld,\"D5\":%ld,\"D6\":%ld,\"D7\":%ld}",digitalRead(0),digitalRead(1),digitalRead(2),digitalRead(3),digitalRead(4),digitalRead(5),digitalRead(6),digitalRead(7));
+                    sprintf(jsonD,"{\"TS\":%s\,\"D0\":%ld\,\"D1\":%ld,\"D2\":%ld,\"D3\":%ld,\"D4\":%ld,\"D5\":%ld,\"D6\":%ld,\"D7\":%ld}",TS,digitalRead(0),digitalRead(1),digitalRead(2),digitalRead(3),digitalRead(4),digitalRead(5),digitalRead(6),digitalRead(7));
                     HttpResponseStatic resp(jsonD, strlen(jsonD));
                     client << resp.status(400);
                 } else if (!strcmp(caps[0].ptr, "ana")) {
-                    sprintf(jsonA,"{\"A0\":%ld\,\"A1\":%ld,\"A2\":%ld,\"A3\":%ld,\"A4\":%ld,\"A5\":%ld,\"A6\":%ld,\"A7\":%ld}",analogRead(0),analogRead(1),analogRead(2),analogRead(3),analogRead(4),analogRead(5),analogRead(6),analogRead(7));
+                    sprintf(jsonA,"{\"TS\":%s\,\"A0\":%ld\,\"A1\":%ld,\"A2\":%ld,\"A3\":%ld,\"A4\":%ld,\"A5\":%ld,\"A6\":%ld,\"A7\":%ld}",TS,analogRead(0),analogRead(1),analogRead(2),analogRead(3),analogRead(4),analogRead(5),analogRead(6),analogRead(7));
                     HttpResponseStatic resp(jsonA, strlen(jsonA));
                     client << resp.status(400);
                 } else {
@@ -212,21 +225,46 @@ WebServer ws;
 
 void setup() {
 
-    Serial.begin(9600);
-    delay(1000);
-    Serial.println(Network.localIP());
-    Serial.println(Network.subnetMask());
-    Serial.println(Network.gatewayIP());
-    Serial.println(Network.SSID());
+    rtc.begin(&UDPClient, "north-america.pool.ntp.org");
+    rtc.setTimeZone(1); // gmt offset
+    //Serial.begin(9600);
+    //delay(1000);
+    //Serial.println(Network.localIP());
+    //Serial.println(Network.subnetMask());
+    //Serial.println(Network.gatewayIP());
+    //Serial.println(Network.SSID());
     //Serial.println(Spark.deviceID());
-
     ws.begin();
 }
 
 void loop() {
+     currentTime = rtc.now();
+    if (currentTime != lastTime) {
+      byte sec = rtc.second(currentTime);
+      if (sec == 10) {
+	// Build Date String
+	    timeStr = "";
+	    timeStr += rtc.yearString(currentTime);
+	    timeStr += rtc.monthString(currentTime);
+	    timeStr += rtc.dayString(currentTime);
+	    Serial.println(timeStr);
+    } else if (sec == 40) {
+	    // Including current timezone
+	    //Serial.println(rtc.ISODateString(currentTime));
+    } else if (sec == 50) {
+	    // UTC or Zulu time
+	    //Serial.println(rtc.ISODateUTCString(currentTime));	
+      } else {
+		timeStr = "";
+	    timeStr += rtc.yearString(currentTime);
+	    timeStr += rtc.monthString(currentTime);
+	    timeStr += rtc.dayString(currentTime);
+	    timeStr += rtc.hourString(currentTime);
+	    timeStr += rtc.minuteString(currentTime);
+	    timeStr += rtc.secondString(currentTime);	
+	    //Serial.println(timeStr);
+      }
+      lastTime = currentTime;
+    }
     ws.loop();
-
 }
-
-
-
