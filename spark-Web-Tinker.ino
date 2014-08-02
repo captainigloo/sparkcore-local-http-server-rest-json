@@ -224,7 +224,6 @@ public:
 WebServer ws;
 
 void setup() {
-
     rtc.begin(&UDPClient, "north-america.pool.ntp.org");
     rtc.setTimeZone(1); // gmt offset
     //Serial.begin(9600);
