@@ -1,12 +1,12 @@
 // This #include statement was automatically added by the Spark IDE.
 
-#include "http_parser.h"
-#include "HttpResponse.h"
-#include "HttpRequest.h"
-#include "slre.h"
+#include "sparkcore-local-http-server-rest-json/http_parser.h"
+#include "sparkcore-local-http-server-rest-json/HttpResponse.h"
+#include "sparkcore-local-http-server-rest-json/HttpRequest.h"
+#include "sparkcore-local-http-server-rest-json/slre.h"
 #include <map>
 #include <list>
-#include "sparkcore-local-http-server-rest-json.h"
+#include "sparkcore-local-http-server-rest-json/sparkcore-local-http-server-rest-json.h"
 
 UDP UDPClient;
 SparkTime rtc;
