@@ -1,5 +1,5 @@
 # HTTP server (REST & JSON) on [Spark core](https://www.spark.io/)
-
+![alt text](https://s3.amazonaws.com/spark-website/spark.png "")
 ## EN : Local HTTP server (REST & JSON) for Sparkcore
 
 This project implement a Http server on Sparkcore itself. Once compiled into the [Web IDE](https://www.spark.io/build), the server will be available at http://IP-SPARKCORE (port 80 by default)
@@ -66,7 +66,6 @@ Remerciements à :
 ![Add file](http://domotique-info.fr/wp-content/uploads/2014/04/domotique-info-webideaddlib.gif)
 
 Old GUI version :
-![alt text](https://s3.amazonaws.com/spark-website/spark.png "")
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=ifYkC7UdMVA
 " target="_blank"><img src="http://img.youtube.com/vi/ifYkC7UdMVA/0.jpg" 
