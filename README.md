@@ -27,6 +27,8 @@ This project implement a Http server on Sparkcore itself. Once compiled into the
 - HttpRequest.cpp
 - http_parser.h
 - http_parser.cpp
+- SparkTime.h
+- SparkTime.cpp
 
 Thanks to :
 - [SLRE: Super Light Regular Expression library](https://github.com/cesanta/slre)
@@ -50,14 +52,16 @@ Ce projet permet de mettre en oeuvre un serveur sur le Spark core lui-même.
 Un fois compilé dans le [Web IDE](https://www.spark.io/build), le serveur sera accessible à l'adresse http://IP-SPARKCORE (port :80 par défaut). Ce projet est un exemple permettant d'envisager d'autres projet.
 
 Fichiers communs des projets (Rappel .h = fichier d'entête, .cpp = fichier de définition [Sources]) :
-- slre.h : 
-- slre.cpp :
-- HttpResponse.h : 
-- HttpResponse.cpp :
-- HttpRequest.h :
-- HttpRequest.cpp :
-- http_parser.h :
-- http_parser.cpp :
+- slre.h
+- slre.cpp
+- HttpResponse.h
+- HttpResponse.cpp
+- HttpRequest.h
+- HttpRequest.cpp
+- http_parser.h
+- http_parser.cpp
+- SparkTime.h
+- SparkTime.cpp
 
 Remerciements à :
 - [SLRE: Super Light Regular Expression library](https://github.com/cesanta/slre)
