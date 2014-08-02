@@ -24,7 +24,7 @@ Thanks to :
 ### Projects
 - Project 1 : spark-Web-Tinker.ino
 
-RESTFull URL : http://IP-Sparkcore/D0/on|off.
+RESTFull URL : http://IP-Sparkcore/D0/on|off
 Digital JSON URL : http://IP-Sparkcore/json/dig/
 Return : {"TS":20140802091229,"D0":0,"D1":0,"D2":0,"D3":0,"D4":0,"D5":0,"D6":0,"D7":1}
 Analog JSON URL : http://IP-Sparkcore/json/ana/
