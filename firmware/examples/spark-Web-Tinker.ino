@@ -6,7 +6,7 @@
 #include "slre.h"
 #include <map>
 #include <list>
-#include "SparkTime.h"
+#include "sparkcore-local-http-server-rest-json.h"
 
 UDP UDPClient;
 SparkTime rtc;
