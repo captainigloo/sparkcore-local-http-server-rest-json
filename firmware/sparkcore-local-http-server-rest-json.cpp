@@ -28,7 +28,7 @@
 
 */
 
-#include "SparkTime.h"
+#include "sparkcore-local-http-server-rest-json.h"
 
 SparkTime::SparkTime()
 {
